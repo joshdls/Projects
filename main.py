@@ -21,21 +21,22 @@ def piece(unit_size,size_of_space):
 print(logo)
 print("Square Footage Calculator")
 
-
-unit_of_measurement = input("Measurement of product in inches[i] or feet[f]?:").lower()
-
-width = float(input("Width of product: "))
-length = float(input("Length of product: "))
-
-if unit_of_measurement == 'i':
-  unit_sqft = inches(user_width = width, user_length = length)
-elif unit_of_measurement == 'f':
-  unit_sqft = feet(user_width = width, user_length = length)
-
-space_size = float(input("Area of coverage size(sqft): "))
-unit_of_product = input("Sold by piece[p] or carton[c]?: ").lower()
+unit_of_product = input("Is product sold by piece[p] or carton[c]?: ").lower()
 
 if unit_of_product == 'p':
+
+  unit_of_measurement = input("Measurement of product in inches[i] or feet[f]?:").lower()
+  
+  width = float(input("Width of product: "))
+  length = float(input("Length of product: "))
+  
+  if unit_of_measurement == 'i':
+    unit_sqft = inches(user_width = width, user_length = length)
+  elif unit_of_measurement == 'f':
+    unit_sqft = feet(user_width = width, user_length = length)
+  
+  space_size = float(input("Area of coverage size(sqft): "))
+  
   pieces_needed = piece(unit_size = unit_sqft, size_of_space = space_size)
   price_of_unit = float(input("How much is each piece?: $"))
   price_of_size = price_of_unit * pieces_needed
@@ -49,9 +50,15 @@ if unit_of_product == 'p':
     print(f"Extra pieces: {(box_total * box_count)-pieces_needed}")
   elif box_check == 'n':
     pass
-    
-elif unit_of_product == 'c':
-  pass
+
+if unit_of_product == 'c':
+  square_of_carton = float(input("Carton Square footage?: "))
+  cost_of_carton = float(input("Cost of carton?: $"))
+  space_size = float(input("Area of coverage size(sqft): "))
+  carton_cover_space = math.ceil(space_size / square_of_carton)
+  print(f"Cartons needed(rounded): {carton_cover_space}")
+  print(f"Cost of {carton_cover_space} cartons: ${cost_of_carton * carton_cover_space} ")
+  print(f"Extra Sqft: {abs(space_size -(carton_cover_space * square_of_carton))}")
   
   
   
